@@ -1,0 +1,49 @@
+<nav class="navbar navbar-expand-sm navbar-light bg-custom">
+  <a class="navbar-brand h1" href="#">Compras App</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item" routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      *ngIf="isAuth()">
+        <a class="nav-link"routerLink="/">Inicio</a>
+      </li>
+      <li class="nav-item" routerLinkActive="active" *ngIf="isAuth()">
+        <a class="nav-link" routerLink="/proveedores">
+          <i class="fas fa-dollar-sign"></i>
+          Proveedores
+        </a>
+      </li>
+      <li class="nav-item" routerLinkActive="active" *ngIf="isAuth()">
+        <a class="nav-link" routerLink="/presupuestos">
+          <i class="fas fa-dollar-sign"></i>
+          Presupuestos
+        </a>
+      </li>
+      <li class="nav-item" routerLinkActive="active" *ngIf="isAuth()">
+        <a class="nav-link" routerLink="/facturas">
+          <i class="fas fa-cart-plus"></i>
+          Facturas
+        </a>
+      </li>
+      <li class="nav-item" routerLinkActive="active" *ngIf="isAuth()">
+        <a class="nav-link" routerLink="/contratos">
+          <i class="fas fa-map"></i>
+          Contratos
+        </a>
+      </li>
+      <!-- <li class="nav-item" routerLinkActive="active" *ngIf="isAuth()">
+          <a class="nav-link" routerLink="/uploads">Subir contrato</a>
+      </li> -->
+      <li class="nav-item" routerLinkActive="active" *ngIf="!isAuth()">
+        <button class="btn btn-primary" routerLink="/inises">Inicio sesion</button>
+      </li>
+      <li class="nav-item" routerLinkActive="active" *ngIf="isAuth()">
+        <button class="btn btn-transparent" (click)="onLogout()"><i class="fa fa-sign-out text-dark font-weight-bold" aria-hidden="true"></i></button>
+      </li>
+    </ul>
+  </div>
+</nav>

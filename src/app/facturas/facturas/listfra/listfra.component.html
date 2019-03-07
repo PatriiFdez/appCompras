@@ -1,0 +1,56 @@
+<div class="row">
+    <div class="col">
+        <h3 class="title">Listado de facturas</h3>
+    </div>
+    <div class="col">
+        <a class="btn btn-primary float-md-right mb-4" routerLink="/addfra">
+          Añadir nueva factura
+        </a>
+    </div>
+  </div>
+
+  <div class="filters row rounded p-3 bg-dark">
+    <input type="search" class="form-control col mr-1" [(ngModel)]="codigo" placeholder="Código" (keyup)="filterValue('codigo', codigo)">
+    <input type="search" class="form-control col mr-1" [(ngModel)]="fecha" placeholder="Fecha" (keyup)="filterValue('fecha', fecha)">
+    <input type="search" class="form-control col mr-1" [(ngModel)]="concepto" placeholder="Concepto" (keyup)="filterValue('concepto', concepto)">
+    <input type="search" class="form-control col mr-1" [(ngModel)]="proveedor" placeholder="Proveedor" (keyup)="filterValue('proveedor', proveedor)">
+    <input type="search" class="form-control col mr-1" [(ngModel)]="total" placeholder="Total" (keyup)="filterValue('total', total)">
+  </div>
+ <!-- <input type="search" class="form-control" placeholder="Filtrar por código" [formControl]="campoBusqueda"> -->
+
+<table class="table table-striped" style="margin-top: 40px">
+  <thead>
+    <tr class="filters">
+      <th>Código</th>
+      <th>Fecha</th>
+      <th>Concepto</th>
+      <th>Proveedor</th>
+      <th>Total</th>
+      <th>Editar</th>
+      <th>Eliminar</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let factura of facturas">
+      <td> {{ factura.codigo }}</td>
+      <td> {{ factura.fecha | date:'dd/MM/yyyy' }} </td>
+      <td> {{ factura.concepto }}</td>
+      <td> {{ factura.proveedor }} </td>
+      <td> {{ factura.total }} </td>
+      <td>
+        <button type="button" class="btn btn-outline-success" routerLink="/editfra/{{ factura.id$ }}">
+          <i class="fa fa-edit"></i>
+        </button>
+      </td>
+      <td>
+        <button type="button" class="btn btn-outline-danger"
+                (click)="eliminarFactura(factura.id$)">
+          <i class="fa fa-trash"></i>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<div *ngIf="noresultados">
+  <p class="text-warning">No existe ninguna coincidencia</p>
+</div>

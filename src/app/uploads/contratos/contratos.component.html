@@ -1,0 +1,9 @@
+<div class="row my-3">
+  <h3 class="col">  Listado de contratos </h3>
+  <a class="btn btn-primary float-md-right col-3" routerLink="/uploads">Subir nuevo contrato</a>
+</div>
+<div class="row">
+  <div class="col-6 my-2" *ngFor="let upload of uploads">
+    <app-detalles [upload]="upload"></app-detalles>
+  </div>
+</div>

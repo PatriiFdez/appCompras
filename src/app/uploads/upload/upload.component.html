@@ -1,0 +1,28 @@
+<div class="container">
+  <h3>Contratos</h3>
+  <hr>
+    <div class="uploader">
+      <p style="font-size: 40px;">
+        <i class="far fa-file-pdf" style="padding-left: 20px;"></i>
+        <i class="far fa-file-word" style="padding-left: 20px;"></i>
+        <i class="far fa-file-excel" style="padding-left: 20px;"></i>
+        <i class="far fa-file-alt" style="padding-left: 20px;"></i>
+      </p>
+      <input type="file" (change)="detectFiles($event)">
+    </div>
+    <br>
+    <br>
+    <div *ngIf="loading">
+      <div class="progress">
+        <div class="progress-bar progress-bar-animated" [ngStyle]="{ 'width': currentUpload?.progress + '%'}"></div>
+      </div>
+      <p class="text-center" *ngIf="currentUpload?.progress < 100">Subiendo... {{ currentUpload?.name }}</p>
+      <p class="text-center" *ngIf="currentUpload?.progress < 100"> {{ currentUpload?.progress | number: '1.2-2' }} % Completado </p>
+      <p class="text-center" *ngIf="currentUpload?.progress == 100"> Subida completada </p>
+    </div>
+
+  <div class="text-center mt-4">
+    <button type="button" class="btn btn-success mr-2" [disabled]="!selectedFiles" (click)="uploadSingle()">Subir archivo</button>
+    <a class="btn btn-danger" routerLink="/contratos">Cancelar</a>
+  </div>
+</div>

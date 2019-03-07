@@ -1,0 +1,79 @@
+<div class="row">
+  <div class="col">
+    <h3 class="title">Listado de proveedores</h3
+      ></div>
+  <div class="col">
+    <a class="btn btn-primary float-md-right mb-4" routerLink="/addprov">
+    Añadir nuevo proveedor
+  </a>
+</div>
+</div>
+
+<div class="filters row rounded p-3 bg-dark">
+  <input type="search" class="form-control col mr-1" [(ngModel)]="nombre" placeholder="Nombre" (keyup)="filterValue('nombre', nombre)">
+  <input type="search" class="form-control col mr-1" [(ngModel)]="cif" placeholder="CIF" (keyup)="filterValue('cif', cif)">
+  <input type="search" class="form-control col mr-1" [(ngModel)]="cp" placeholder="Código postal" (keyup)="filterValue('cp', cp)">
+  <input type="search" class="form-control col mr-1" [(ngModel)]="localidad" placeholder="Localidad" (keyup)="filterValue('localidad', localidad)">
+  <select name="provincias" class="form-control col mr-1" [(ngModel)]="provincia" (change)="filterProvincia('provincia', provincia)">
+    <option [ngValue]="undefined">Provincias</option>
+    <option *ngFor="let prov of provincias">{{prov}}</option>
+  </select>
+  <input type="search" class="form-control col mr-1" [(ngModel)]="telefono" placeholder="Telefono" (keyup)="filterValue('telefono', telefono)">
+  <input type="search" class="form-control col mr-1" [(ngModel)]="email" placeholder="Email" (keyup)="filterValue('email', email)">
+  <input type="search" class="form-control col" [(ngModel)]="contacto" placeholder="Contacto" (keyup)="filterValue('contacto', contacto)">
+</div>
+
+<!-- <input type="search" class="form-control" placeholder="Teclee un proveedor..." [formControl]="campoBusqueda"> -->
+
+<div *ngIf="cargando" class="text-center" style="padding-top:60px;">
+  <img src="../../../assets/spinner.gif" alt="Cargando...">
+</div>
+<!-- <div *ngIf="resultados"> -->
+<div>
+  <table class="table table-hover" style="margin-top: 40px">
+    <thead>
+      <tr class="filters">
+        <th scope="col">Nombre</th>
+        <th scope="col">CIF</th>
+        <th scope="col">Direccion</th>
+        <th scope="col">Codigo Postal</th>
+        <th scope="col">Localidad</th>
+        <th scope="col">Provincia</th>
+        <th scope="col">Teléfono</th>
+        <th scope="col">Correo electrónico</th>
+        <th scope="col">Contacto</th>
+        <th scope="col">Editar</th>
+        <th scope="col">Eliminar</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let proveedor of filteredProveedores">
+        <td> {{ proveedor.nombre }}</td>
+        <td> {{ proveedor.cif }}</td>
+        <td> {{ proveedor.direccion }}</td>
+        <td> {{ proveedor.cp }}</td>
+        <td> {{ proveedor.localidad }}</td>
+        <td> {{ proveedor.provincia }}</td>
+        <td> {{ proveedor.telefono }}</td>
+        <td><a href="mailto:{{ proveedor.email }}"> {{ proveedor.email }} </a></td>
+        <td> {{ proveedor.contacto }}</td>
+        <td>
+          <button type="button" class="btn btn-outline-success"
+                  routerLink="/editprov/{{ proveedor.id$ }}">
+            <i class="fa fa-edit"></i>
+          </button>
+        </td>
+        <td>
+          <button type="button" class="btn btn-outline-danger"
+                  (click)="eliminarProveedor(proveedor.id$)">
+            <i class="fa fa-trash"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<!-- <div *ngIf="noresultados"> -->
+<div *ngIf="filteredProveedores.length < 1 && !cargando">
+  <p class="text-warning">No existe ninguna coincidencia</p>
+</div>

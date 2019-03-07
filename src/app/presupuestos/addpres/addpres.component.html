@@ -1,0 +1,141 @@
+<div class="container">
+
+  <div class="row">
+    <div class="col">
+      <h2 class="title">Añadir presupuesto</h2>
+    </div>
+    <div class="col-sm text-right">
+      <a class="btn btn-sm btn-info" routerLink="/presupuestos">
+        <i class="fa fa-undo"></i>
+        Volver al listado
+      </a>
+    </div>
+  </div>
+
+    <form [formGroup]="presupuestoForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="proveedor">Proveedor</label> &nbsp;
+          <i class="fa fa-check-circle check"
+            *ngIf="presupuestoForm.controls.proveedor.valid"></i>
+          <i class="fa fa-exclamation-circle uncheck"
+            *ngIf="presupuestoForm.controls.proveedor.invalid &&
+               presupuestoForm.controls.proveedor.touched"></i>
+        <select class="form-control"
+               id="proveedor"
+               formControlName="proveedor">
+               <option value="">Seleccione un proveedor</option>
+               <option *ngFor="let proveedor of proveedores"
+                        value="{{ proveedor.nombre }}">{{ proveedor.nombre }}</option>
+        </select>
+        <p class="pt-2 pb-2 px-auto m-2 alert alert-danger"
+               *ngIf="presupuestoForm.controls.proveedor.invalid &&
+                      presupuestoForm.controls.proveedor.touched">
+             Debe seleccionar un proveedor
+          </p>
+      </div>
+      <div class="form-group">
+        <label for="fecha">Fecha</label> &nbsp;
+          <i class="fa fa-check-circle check"></i>
+        <input type="date"
+               class="form-control"
+               id="fecha"
+               min="1970-01-01" max="{{currentDate | date:'yyyy-MM-dd'}}"
+               value="{{currentDate | date:'yyyy-MM-dd'}}"
+               formControlName="fecha">
+      </div>
+      <div class="form-group">
+        <label for="concepto">Concepto</label> &nbsp;
+          <i class="fa fa-check-circle check" *ngIf="presupuestoForm.controls.concepto.valid"></i>
+          <i class="fa fa-exclamation-circle uncheck" *ngIf="presupuestoForm.controls.concepto.invalid &&
+               presupuestoForm.controls.concepto.touched"></i>
+        <input type="text" class="form-control"
+               id="concepto"
+               minlength="5" maxlength="50"
+               placeholder="Concepto presupuesto"
+               formControlName="concepto">
+          <p class="pt-2 pb-2 px-auto m-2 alert alert-danger"
+              *ngIf="presupuestoForm.controls.concepto.invalid &&
+              presupuestoForm.controls.concepto.touched">
+            Debe introducir un concepto
+          </p>
+      </div>
+      <div class="form-row">
+          <div class="form-group col-8">
+              <label for="base">Base imponible</label> &nbsp;
+               <i class="fa fa-check-circle check" *ngIf="presupuestoForm.controls.base.valid"></i>
+               <i class="fa fa-exclamation-circle uncheck" *ngIf="presupuestoForm.controls.base.invalid &&
+               presupuestoForm.controls.base.touched"></i>
+              <input type="number"
+                     class="form-control"
+                     id="base"
+                     placeholder="ej. 25000"
+                     formControlName="base">
+                <p class="pt-2 pb-2 px-auto m-2 alert alert-danger"
+                   *ngIf="presupuestoForm.controls.base.invalid &&
+                          presupuestoForm.controls.base.touched">
+                  Debe introducir una base imponible
+                </p>
+            </div>
+            <div class="form-group col-4">
+              <label for="tipo">Tipo de IVA</label> &nbsp;
+                <i class="fa fa-check-circle check" *ngIf="presupuestoForm.controls.tipo.valid"></i>
+                <i class="fa fa-exclamation-circle uncheck" *ngIf="presupuestoForm.controls.tipo.invalid &&
+                presupuestoForm.controls.tipo.touched"></i>
+              <select class="form-control" id="tipo"  formControlName="tipo">
+                <option value="">Seleccione...</option>
+                <option value=0> 0 % </option>
+                <option value=0.04> 4 % </option>
+                <option value=0.10> 10 % </option>
+                <option value=0.21> 21 % </option>
+              </select>
+              <p class="pt-2 pb-2 px-auto m-2 alert alert-danger"
+                 *ngIf="presupuestoForm.controls.tipo.invalid &&
+                        presupuestoForm.controls.tipo.touched">
+                Debe seleccionar el tipo de IVA
+              </p>
+            </div>
+      </div>
+      <div class="form-row">
+      <div class="form-group col-6">
+        <label for="iva">Importe IVA</label>
+        <input type="number"
+               class="form-control"
+               id="iva"
+               formControlName="iva"
+               aria-describedby="importeivamsg"
+               [(ngModel)]="presupuestoForm.value.iva"
+               disabled>
+               <small id="importeivamsg" class="form-text text-muted">Este campo se calcula automaticamente</small>
+      </div>
+      <div class="form-group col-6">
+        <label for="total">Total presupuesto</label>
+        <input type="number"
+               class="form-control"
+               id="total"
+               formControlName="total"
+               aria-describedby="totalmsg"
+               [(ngModel)]="presupuestoForm.value.total"
+               disabled>
+          <small id="totalmsg" class="form-text text-muted">Este campo se calcula automaticamente</small>
+      </div>
+    </div>
+      <button type="submit"
+              class="btn btn-sm btn-info"
+              [disabled]="!presupuestoForm.valid">
+               Añadir presupuesto
+      </button>
+      <a class="btn btn-sm btn-danger ml-2" routerLink="/presupuestos">Cancelar</a>
+      <p class="alert alert-danger mt-2" *ngIf="!presupuestoForm.valid">
+        Por favor, complete todos los campos obligatorios
+      </p>
+    </form>
+   <!--  <pre>
+      Valor del formulario: {{ presupuestoForm.value | json }}
+    </pre>
+    <pre>
+      Estado del formulario: {{ presupuestoForm.status | json }}
+    </pre>
+    <pre>
+      Valor del objeto: {{ presupuesto | json }}
+    </pre> -->
+  </div>

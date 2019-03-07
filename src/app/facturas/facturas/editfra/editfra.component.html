@@ -1,0 +1,118 @@
+<div class="container">
+    <div class="row">
+        <div class="col">
+          <h2 class="title">Editar factura</h2>
+        </div>
+        <div class="col-sm text-right">
+          <a class="btn btn-sm btn-info" routerLink="/facturas">
+            <i class="fa fa-undo"></i>
+            Regresar al listado
+          </a>
+        </div>
+      </div>
+    <form [formGroup]="facturaForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="codigo">Numero/Código factura</label> &nbsp;
+        <i class="fa fa-check-circle check"
+           *ngIf="facturaForm.controls.codigo.valid"></i>
+        <i class="fa fa-check-exclamation uncheck"
+           *ngIf="facturaForm.controls.codigo.invalid &&
+                  facturaForm.controls.codigo.touched"></i>
+        <input type="text"
+               class="form-control"
+               id="codigo"
+               formControlName="codigo"
+               [(ngModel)]="factura.codigo">
+      <p class="pt-2 pb-2 px-auto m-2 alert alert-danger"
+         *ngIf="facturaForm.controls.codigo.invalid &&
+                facturaForm.controls.codigo.touched">
+              Debe introducir un código
+      </p>
+      </div>
+      <div class="form-group">
+        <label for="fecha">Fecha</label> &nbsp;
+        <i class="fa fa-check-circle check"
+           *ngIf="facturaForm.controls.fecha.valid"></i>
+        <i class="fa fa-check-exclamation uncheck"
+           *ngIf="facturaForm.controls.fecha.invalid &&
+                  facturaForm.controls.fecha.touched"></i>
+        <input type="date"
+               class="form-control"
+               id="fecha"
+               formControlName="fecha"
+               [(ngModel)]="factura.fecha">
+               <p class="pt-2 pb-2 px-auto m-2 alert alert-danger"
+         *ngIf="facturaForm.controls.fecha.invalid &&
+                facturaForm.controls.fecha.touched">
+              Debe seleccionar una fecha
+      </p>
+      </div>
+      <div class="form-group">
+        <label for="concepto">Concepto</label> &nbsp;
+        <i class="fa fa-check-circle check"
+           *ngIf="facturaForm.controls.concepto.valid"></i>
+        <i class="fa fa-check-exclamation uncheck"
+           *ngIf="facturaForm.controls.concepto.invalid &&
+                  facturaForm.controls.concepto.touched"></i>
+        <input type="text"
+               class="form-control"
+               id="concepto"
+               formControlName="concepto"
+               [(ngModel)]="factura.concepto">
+               <p class="pt-2 pb-2 px-auto m-2 alert alert-danger"
+         *ngIf="facturaForm.controls.concepto.invalid &&
+                facturaForm.controls.concepto.touched">
+              El concepto no puede quedar vacío
+      </p>
+      </div>
+      <div class="form-group">
+        <label for="proveedor">Proveedor</label> &nbsp;
+        <i class="fa fa-check-circle check"
+           *ngIf="facturaForm.controls.proveedor.valid"></i>
+        <i class="fa fa-check-exclamation uncheck"
+           *ngIf="facturaForm.controls.proveedor.invalid &&
+                  facturaForm.controls.proveedor.touched"></i>
+                  <select class="form-control"
+               id="proveedor"
+               formControlName="proveedor"
+               [(ngModel)]="factura.proveedor">
+               <option value="">Seleccione</option>
+               <option *ngFor="let proveedor of proveedores"
+                        value="{{ proveedor.nombre }}">{{ proveedor.nombre }}</option>
+        </select>
+               <p class="pt-2 pb-2 px-auto m-2 alert alert-danger"
+         *ngIf="facturaForm.controls.proveedor.invalid &&
+                facturaForm.controls.proveedor.touched">
+              Debe seleccionar un proveedor
+      </p>
+      </div>
+      <div class="form-group">
+        <label for="total">Total factura</label> &nbsp;
+        <i class="fa fa-check-circle check"
+           *ngIf="facturaForm.controls.total.valid"></i>
+        <i class="fa fa-check-exclamation uncheck"
+           *ngIf="facturaForm.controls.total.invalid &&
+                  facturaForm.controls.total.touched"></i>
+        <input type="number"
+               class="form-control"
+               id="total"
+               formControlName="total"
+               [(ngModel)]="factura.total">
+               <p class="pt-2 pb-2 px-auto m-2 alert alert-danger"
+         *ngIf="facturaForm.controls.total.invalid &&
+                facturaForm.controls.total.touched">
+              Debe introducir un total
+      </p>
+      </div>
+      <button type="submit"
+              class="btn btn-sm btn-primary"
+              [disabled]="!facturaForm.valid">
+               Añadir factura
+      </button>
+      <a class="btn btn-sm btn-danger ml-2" routerLink="/facturas">Cancelar</a>
+      <p class="alert alert-danger mt-2" *ngIf="!facturaForm.valid">
+        Por favor, complete todos los campos obligatorios
+      </p>
+    </form>
+  </div>
+

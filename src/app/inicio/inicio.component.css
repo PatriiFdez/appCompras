@@ -1,0 +1,47 @@
+.rectorange {
+  background-color: #f9cb86;
+  color: black;
+  text-align: center;
+  padding: 20px;
+  margin: 20px;
+}
+
+.rectorange:hover {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.4);
+}
+
+.rectgreen {
+  background-color: #83fca5;
+  color: black;
+  text-align: center;
+  padding: 20px;
+  margin: 20px;
+}
+
+.rectgreen:hover {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.4);
+}
+
+.rectviolet {
+  background-color: #a3ceff;
+  color: black;
+  text-align: center;
+  padding: 20px;
+  margin: 20px;
+}
+
+.rectviolet:hover {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.4);
+}
+
+.rectpink {
+  background-color: #f7bbe0;
+  color: black;
+  text-align: center;
+  padding: 20px;
+  margin: 20px;
+}
+
+.rectpink:hover {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.4);
+}

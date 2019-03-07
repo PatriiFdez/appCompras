@@ -1,0 +1,25 @@
+<div class="row">
+  <div class="col col-md"></div>
+  <div class="col-10 col-md-6">
+    <form [formGroup]="registroForm" (ngSubmit)="onSubmit()">
+      <h4>Introduzca sus datos de registro</h4>
+      <label>Correo electronico</label>
+      <input type="mail" class="form-control" id="inputEmail" autofocus
+      formControlName="email">
+      <p class="alert alert-danger" *ngIf="erroresForm.email">
+        {{ erroresForm.email }}
+      </p>
+      <label>Contraseña</label>
+      <input type="password" class="form-control" id="inputPassword"
+      formControlName="password">
+      <p class="alert alert-danger" *ngIf="erroresForm.password">
+        {{ erroresForm.password }}
+      </p>
+      <hr>
+      <button type="submit" class="btn btn-primary"
+        [disabled]="!registroForm.valid"> Registrar </button>
+    </form>
+    <p>Si ya dispone de cuenta pulse <a routerLink="/inises">aquí</a> </p>
+  </div>
+  <div class="col col-md"></div>
+</div>

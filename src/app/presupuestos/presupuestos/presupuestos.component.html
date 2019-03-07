@@ -1,0 +1,62 @@
+<div class="row">
+  <div class="col">
+      <h3 class="title">Listado de presupuestos</h3>
+  </div>
+  <div class="col">
+      <a class="btn btn-primary float-md-right mb-4" routerLink="/addpres">
+        Añadir presupuesto
+      </a>
+  </div>
+</div>
+
+<div class="filters row rounded p-3 bg-dark">
+  <input type="search" class="form-control col mr-1" [(ngModel)]="proveedor" placeholder="Proveedor" (keyup)="filterValue('proveedor', proveedor)">
+  <input type="search" class="form-control col mr-1" [(ngModel)]="fecha" placeholder="Fecha" (keyup)="filterValue('fecha', fecha)">
+  <input type="search" class="form-control col mr-1" [(ngModel)]="concepto" placeholder="Concepto" (keyup)="filterValue('concepto', concepto)">
+  <input type="search" class="form-control col mr-1" [(ngModel)]="importe" placeholder="Importe" (keyup)="filterValue('importe', importe)">
+  <input type="search" class="form-control col mr-1" [(ngModel)]="iva" placeholder="IVA" (keyup)="filterValue('iva', iva)">
+  <input type="search" class="form-control col mr-1" [(ngModel)]="total" placeholder="Total" (keyup)="filterValue('total', total)">
+</div>
+
+<!-- <input type="search" class="form-control" placeholder="Filtrar por proveedor" [formControl]="campoBusqueda"> -->
+
+<table class="table table-hover" style="margin-top: 40px">
+  <thead>
+    <tr class="filters">
+      <th scope="col">Proveedor</th>
+      <th scope="col">Fecha</th>
+      <th scope="col">Concepto</th>
+      <th scope="col">Importe sin IVA</th>
+      <th scope="col">IVA</th>
+      <th scope="col">Total</th>
+      <th scope="col">Editar</th>
+      <th scope="col">Eliminar</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let presupuesto of presupuestos">
+      <th scope="row"> {{ presupuesto.proveedor }}</th>
+      <td> {{ presupuesto.fecha | date:"EEE dd/MMM/yyyy" }} </td>
+      <td> {{ presupuesto.concepto }}</td>
+      <td> {{ presupuesto.base }} </td>
+      <td> {{ presupuesto.iva }} </td>
+      <td> {{ presupuesto.total }} </td>
+      <td>
+        <button type="button" class="btn btn-outline-success"
+                routerLink="/editpres/{{ presupuesto.id$ }}">
+          <i class="fa fa-edit"></i>
+        </button>
+      </td>
+      <td>
+        <button type="button" class="btn btn-outline-danger"
+                (click)="eliminarPresupuesto(presupuesto.id$)">
+          <i class="fa fa-trash"></i>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<!-- <div *ngIf="noresultados"> -->
+<div *ngIf="filteredPresupuestos.length < 1 && !cargando">
+  <p class="text-danger">No existe ninguna coincidencia</p>
+</div>

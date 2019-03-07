@@ -1,0 +1,33 @@
+<!-- <div class="card" style="width: 20rem">
+  <div class="card-block">
+    <h4 class="card-title">Contrato</h4>
+    <p class="card-text"> {{ upload.name }} </p>
+    <a href="{{ upload.url }}" class="btn btn-primary float-md-left"> Visualizar </a>
+    <button class="btn btn-danger float-md-right" (click)="deleteUpload(upload)">
+      Eliminar
+    </button>
+  </div>
+</div> -->
+
+
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Contrato</h5>
+      <p class="card-text">{{ upload.name }}</p>
+      <i class="far fa-file-pdf fa-2x text-danger ml-3" *ngIf="ext == 'pdf'"></i>
+      <i class="far fa-file-word fa-2x text-primary ml-3" *ngIf="ext == 'docx'"></i>
+      <i class="far fa-file-excel fa-2x text-success ml-3" *ngIf="ext == 'xlsx'"></i>
+      <i class="far fa-file-alt fa-2x ml-3" *ngIf="ext != 'pdf' && ext != 'docx' && ext != 'xlsx'"></i>
+      <div class="float-right">
+        <a href="{{ upload.url }}" class="btn btn-primary mr-2">
+            <i class="fas fa-eye"></i>
+            Visualizar
+        </a>
+        <button class="btn btn-danger" (click)="deleteUpload(upload)">
+          <i class="fas fa-trash-alt"></i>
+          Eliminar
+        </button>
+      </div>
+    </div>
+  </div>
+
